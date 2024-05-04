@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Order System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(https://imgs.search.brave.com/EyfXz9sCucm40rajYKVrTmzCOAuC2-uVci_k3ngWyE0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/NTc0OTkzMDUtYmQ2/OGQwYWQ0NjhkP3E9/ODAmdz0xMDAwJmF1/dG89Zm9ybWF0JmZp/dD1jcm9wJml4bGli/PXJiLTQuMC4zJml4/aWQ9TTN3eE1qQTNm/REI4TUh4elpXRnlZ/Mmg4TVRCOGZHWnZi/MlFsTWpCdFpXNTFm/R1Z1ZkRCOGZEQjhm/SHd3);
+            background-repeat: repeat-y;
+            background-size: cover;
+        }
+
+        .Navbar {
+            background-color: rgb(201, 201, 201);
+            display: flex;
+            align-items: center;
+        }
+
+        .Navbar img {
+            width: 5vw;
+            margin-top: 0.5vw;
+            margin-left: 2vw;
+            margin-bottom: 0.5vw;
+        }
+
+        .Navbar h1 {
+            margin-left: 2vw;
+            font-weight: 800;
+            font-style: inherit;
+        }
+
+        .home a {
+            text-decoration: none;
+            margin-left: 55vw;
+        }
+
+        .container {
+            z-index: 2;
+            background-color: rgba(51, 45, 45, 0.7);
+            height: auto;
+            padding: 20px;
+        }
+
+        #checkbox {
+            size: 1vw;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #menu-container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .menu-column {
+            width: 45%;
+        }
+
+        h3,
+        h4,
+        h5,
+        h6,
+        h7,
+        h8 {
+            font-size: 3vw;
+            color: rgb(134, 220, 220);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: wheat;
+            font-size: 2vw;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #order {
+            width: 50%;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: white;
+            text-align: center;
+            /* Center the text */
+        }
+
+        #orderList {
+            /* padding: 0; */
+            font-size: 18px;
+        }
+
+        #orderList li {
+
+            margin-bottom: 5px;
+            font-family: Arial, sans-serif;
+            color: black;
+        }
+
+        #totalPrice {
+            font-weight: bold;
+        }
+
+        #menu-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media screen and (max-width: 1500px) {
+            body {
+                background-size: cover;
+                background-repeat: repeat-y;
+            }
+
+            .Navbar img {
+                width: 9vw;
+            }
+
+            .Navbar h1 {
+                font-size: 2vw;
+            }
+
+            .home a {
+                margin-left: 35vw;
+                font-size: 2vw;
+            }
+
+            .container {
+                height: auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Navbar">
+        <a href="lg.html"> <img
+                src="https://imgs.search.brave.com/N9Kp0sduamOdtDdutt5p-LjxyUakuZvyU5lZZSJLBU8/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/Y29sbGVnZXByYXZl/c2guY29tLzIwMTYv/MDYvSUlULUJodWJh/bmVzd2FyLUxvZ28u/cG5n"
+                alt=""></a>
+        <h1>FOOD MENU & ORDER</h1>
+        <span class="home"><a href="lg.html">GO BACK TO HOME << </a></span>
+    </div>
+    <div class="container">
+        <div id="menu-container">
+            <div class="menu-column">
+                <h3>Breakfast</h3>
+                <ul>
+                    <li><input type="checkbox" id="Masala Dosa" data-price="30"><label for="Masala Dosa">Masala Dosa
+                            (Rs. 30)</label></li>
+                    <li><input type="checkbox" id="Poha" data-price="30"><label for="Poha">Poha(Rs. 30)</label></li>
+                    <li><input type="checkbox" id="Aloo Paratha" data-price="25"><label for="Aloo Paratha">Aloo
+                            Paratha(Rs. 25)</label></li>
+                    <li><input type="checkbox" id="Upma" data-price="20"><label for="Upma">Upma(Rs. 20)</label></li>
+                    <li><input type="checkbox" id="Idli Sambhar" data-price="20"><label for="Idli Sambhar">Idli
+                            Sambhar(Rs. 20)</label></li>
+                    <li><input type="checkbox" id="Puri Sabzi" data-price="30"><label for="Puri Sabzi">Puri Sabzi(Rs.
+                            30)</label></li>
+                </ul>
+            </div>
+            <div class="menu-column">
+                <h3>Lunch</h3>
+                <ul>
+                    <li><input type="checkbox" id="Mix Veg." data-price="50"><label for="Mix Veg">Mix Veg(Rs.
+                            50)</label></li>
+                    <li><input type="checkbox" id="Paneer Masala" data-price="60"><label for="Paneer Masala">Paneer
+                            Masala(Rs. 60)</label></li>
+                    <li><input type="checkbox" id="Dal Tadka" data-price="45"><label for="Dal Tadka">Dal Tadka(Rs.
+                            45)</label></li>
+                    <li><input type="checkbox" id="Mushroom Masala" data-price="80"><label
+                            for="Mushroom Masala">Mushroom Masala(Rs. 80)</label></li>
+                    <li><input type="checkbox" id="Roti" data-price="5"><label for="Roti">Roti (Rs. 5)</label></li>
+                    <li><input type="checkbox" id="Paratha" data-price="7"><label for="Paratha">Paratha (Rs. 7)</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="menu-container">
+            <div class="menu-column">
+                <h3>Snacks</h3>
+                <ul>
+                    <li><input type="checkbox" id="Dahi Vada" data-price="20"><label for="Dahi Vada">Dahi Vada(Rs.
+                            20)</label></li>
+                    <li><input type="checkbox" id="Aloo Chop" data-price="10"><label for="Aloo Chop">Aloo Chop (Rs.
+                            10)</label></li>
+                    <li><input type="checkbox" id="Kachori" data-price="10"><label for="Kachori">Kachori(Rs.10)</label>
+                    </li>
+                    <li><input type="checkbox" id="Samosa" data-price="10"><label for="Samosa">Samosa(Rs. 10)</label>
+                    </li>
+                    <li><input type="checkbox" id="Pav Bhaji" data-price="50"><label for="Pav Bhaji">Pav Bhaji (Rs.
+                            50)</label></li>
+                    <li><input type="checkbox" id="Aloo tikki" data-price="30"><label for="Aloo tikki">Aloo tikki (Rs.
+                            30)</label></li>
+                </ul>
+            </div>
+            <div class="menu-column">
+                <h3>Dinner</h3>
+                <ul>
+                    <li><input type="checkbox" id="Panner tikka masala" data-price="80"><label
+                            for="Panner tikka masala">Panner tikka masala(Rs. 80)</label></li>
+                    <li><input type="checkbox" id="Rogan Josh" data-price="100"><label for="Rogan Josh">Rogan Josh(Rs.
+                            100)</label></li>
+                    <li><input type="checkbox" id="Baingan Bharta" data-price="60"><label for="Baingan Bharta">Baingan
+                            Bharta(Rs. 60)</label></li>
+                    <li><input type="checkbox" id="Lamb Korma" data-price="120"><label for="Lamb Korma">Lamb Korma(Rs.
+                            120)</label></li>
+                    <li><input type="checkbox" id="Roti" data-price="5"><label for="Roti">Roti (Rs. 5)</label></li>
+                    <li><input type="checkbox" id="Paratha" data-price="7"><label for="Paratha">Paratha (Rs. 7)</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button onclick="calculateTotal()">Calculate Total</button>
+    </div>
+    <div id="order" style="background-color: aliceblue;border-radius: 5px;">
+        <h2>Your Order</h2>
+        <ul id="orderList"></ul>
+        <p>Total: Rs<span id="totalPrice">0</span></p>
+        <button id="ordersubmit" onclick="submitOrder()" style="display: none;">Submit Order</button>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            var checkboxes = document.querySelectorAll('#menu-container input[type="checkbox"]:checked');
+            var totalPrice = 0;
+            checkboxes.forEach(function (checkbox) {
+                totalPrice += parseFloat(checkbox.dataset.price);
+            });
+            document.getElementById('totalPrice').textContent = totalPrice;
+
+            document.getElementById("ordersubmit").style.display = "block";
+
+
+            var orderList = document.getElementById('orderList');
+            orderList.innerHTML = ''; // Clear previous order list
+            checkboxes.forEach(function (checkbox) {
+                var itemText = checkbox.nextSibling.textContent.trim();
+                var listItem = document.createElement('li');
+                listItem.textContent = itemText;
+                orderList.appendChild(listItem);
+            });
+        }
+
+
+        function submitOrder() {
+            var orderItems = [];
+            var checkboxes = document.querySelectorAll('#menu input[type="checkbox"]:checked');
+            checkboxes.forEach(function(checkbox) {
+            orderItems.push(checkbox.nextSibling.textContent.trim());
+            });
+            var totalPrice = document.getElementById('totalPrice').textContent;
+        
+            // invoice
+            var invoice = {
+            orderItems: orderItems,
+            totalPrice: totalPrice
+            };
+        
+            // Send invoice data to server-side script for storage
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'save_invoice.php'); // Change this to your server-side script URL
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            // xhr.onload = function() {
+            // if (xhr.status === 200) {
+            //     alert("Invoice saved successfully!");
+            // } else {
+            //     alert("Error saving invoice. Please try again later.");
+            // }
+            // };
+            xhr.send(JSON.stringify(invoice));
+        
+            // Display invoice as an alert
+            alert("order is succesfully placed \nthe restaurant will notify you soon as the order progresses... \nthank you for ordering !");
+        
+            //sending email
+            // var email = "restaurant@example.com";
+            // var subject = "New Food Order";
+            // var body = "New food order has been placed:\n\n" + invoice.orderItems.join("\n") + "\n\nTotal Price: $" + invoice.totalPrice;
+            // var mailtoLink = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+            // window.location.href = mailtoLink;
+        
+            // reload
+            setTimeout(function() {
+            window.location.reload();
+            }, 1000);
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost and Found</title>
+</head>
+<style>
+    /* Existing styles */
+    .Navbar {
+        background-color: rgb(201, 201, 201);
+        display: flex;
+        align-items: center;
+    }
+
+    .Navbar img {
+        width: 5vw;
+        margin-top: 0.5vw;
+        margin-left: 2vw;
+        margin-bottom: 0.5vw;
+    }
+
+    .Navbar h1 {
+        margin-left: 2vw;
+        font-weight: 800;
+        font-style: inherit;
+    }
+
+    .home a {
+        text-decoration: none;
+        margin-left: 55vw;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url(https://imgs.search.brave.com/21sGauSP0ynxbLljcmXZraESw0nQWe93VZe0EJ1TxR0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDM5OTk4/MTEuanBn);
+        background-repeat: repeat-y;
+        background-size: cover;
+    }
+
+    .container {
+        z-index: 2;
+        background-color: rgba(50, 45, 45, 0.7);
+        height: 52vw;
+        background-size: cover;
+    }
+
+    .tabContent {
+        max-width: 50vw;
+        max-height: 60vw;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    #lostFoundPostForm {
+        margin-bottom: 20px;
+    }
+
+    #lostFoundPostInput {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        resize: vertical;
+    }
+
+
+
+    .reply-section {
+        display: none;
+    }
+
+    .reply-section input[type="text"] {
+        width: calc(100% - 90px);
+        padding: 5px;
+        margin: 5%;
+    }
+
+    .reply-section button {
+        padding: 5px 10px;
+    }
+
+
+    .post {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        background-color: white;
+        /* Set background color to white */
+    }
+
+    .reply {
+        background-color: whitesmoke;
+        /* White background color */
+        border: 1px solid #ddd;
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .comment {
+        background-color: whitesmoke;
+        /* White background color */
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+
+
+    .comments-heading {
+        margin-top: 20px;
+        font-size: 18px;
+        color: black;
+    }
+
+    .comments {
+        margin-top: 10px;
+    }
+
+    .post .reply {
+        background-color: #ffffff;
+        /* White background color */
+        border: 1px solid #ddd;
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .post .comment {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Button styles */
+    button {
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+
+    @media screen and (max-width: 1500px) {
+        body {
+            background-size: cover;
+            background-repeat: repeat-y;
+
+        }
+        
+
+        .Navbar img {
+            width: 9vw;
+        }
+
+        .Navbar h1 {
+            font-size: 2vw;
+        }
+
+        .home a {
+            margin-left: 35vw;
+            font-size: 2vw;
+        }
+
+
+        .container {
+            height: auto;
+            padding: 20px;
+        }
+
+        .tabContent {
+            max-width: 90%;
+            /* Adjust width */
+            margin: 0 auto;
+        }
+    }
+</style>
+
+
+<body>
+    <div class="Navbar">
+        <a href="lg.html"> <img
+                src="https://imgs.search.brave.com/N9Kp0sduamOdtDdutt5p-LjxyUakuZvyU5lZZSJLBU8/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/Y29sbGVnZXByYXZl/c2guY29tLzIwMTYv/MDYvSUlULUJodWJh/bmVzd2FyLUxvZ28u/cG5n"
+                alt=""></a>
+        <h1>LOST & FOUND PORTAL</h1>
+        <span class="home"><a href="lg.html">GO BACK TO HOME << </a></span>
+    </div>
+    <div class="container">
+        <div id="lostFound" class="tabContent">
+            <div id="lostFoundPostForm">
+                <h1 style="color: #ff3838; margin-top: 10vw;">Post column</h1>
+                <div id="lostFoundPostSection">
+                    <textarea rows="8" id="lostFoundPostInput" placeholder="Type your post..."></textarea>
+                </div>
+                <button onclick="submitPost('lostFound')">Post</button>
+            </div>
+            <div id="lostFoundPostList"></div>
+        </div>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                loadSavedPosts('lostFound');
+               
+            });
+
+            function loadSavedPosts(tabName) {
+                const savedPosts = JSON.parse(localStorage.getItem(`${tabName}Posts`)) || [];
+                let postList = document.getElementById(`${tabName}PostList`);
+                if (!postList) {
+                    postList = document.createElement("div");
+                    postList.id = `${tabName}PostList`;
+                    document.body.appendChild(postList);
+                }
+                savedPosts.forEach(savedPost => {
+                    const newPost = createPostElement(savedPost, tabName);
+                    postList.appendChild(newPost);
+                });
+            }
+
+            function saveToLocalStorage(dataKey, newData) {
+                localStorage.setItem(dataKey, JSON.stringify(newData));
+            }
+
+            function createPostElement(savedPost, tabName) {
+                const newPost = document.createElement("div");
+                newPost.className = "post";
+                newPost.id = savedPost.id || (`${tabName}Post` + Date.now());
+
+                const postText = document.createElement("p");
+                postText.textContent = savedPost.postText;
+
+                const replyButton = document.createElement("button");
+                replyButton.textContent = "Reply";
+                replyButton.addEventListener("click", function () {
+                    showReplyForm(newPost);
+                });
+
+                const answerSection = document.createElement("div");
+                answerSection.className = "answer-section";
+
+                const answerInput = document.createElement("input");
+                answerInput.type = "text";
+                answerInput.placeholder = "Your Answer...";
+
+                const submitAnswerButton = document.createElement("button");
+                submitAnswerButton.textContent = "Submit Answer";
+                submitAnswerButton.addEventListener("click", function () {
+                    submitAnswer(newPost, answerInput, tabName);
+                });
+
+                const commentsHeading = document.createElement("h4");
+                commentsHeading.className = "comments-heading";
+                commentsHeading.textContent = "Comments";
+
+                function showReplyForm() {
+                    answerSection.style.display = "block";
+                }
+
+                answerSection.appendChild(answerInput);
+                answerSection.appendChild(submitAnswerButton);
+
+                newPost.appendChild(postText);
+                newPost.appendChild(replyButton);
+                newPost.appendChild(answerSection);
+                newPost.appendChild(commentsHeading);
+
+                savedPost.replies.forEach(replyText => {
+                    const replySection = document.createElement("div");
+                    replySection.className = "reply";
+                    replySection.textContent = replyText;
+                    newPost.appendChild(replySection);
+                });
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", function () {
+                    deletePost(newPost.id, tabName);
+                });
+
+                newPost.appendChild(deleteButton);
+
+                return newPost;
+            }
+
+            function getAllPosts(tabName) {
+                return JSON.parse(localStorage.getItem(`${tabName}Posts`)) || [];
+            }
+
+            function submitAnswer(post, answerInput, tabName) {
+                const replyText = answerInput.value;
+                if (replyText.trim() !== "") {
+                    const replySection = document.createElement("div");
+                    replySection.className = "reply";
+                    replySection.textContent = replyText;
+                    post.appendChild(replySection);
+
+                    answerInput.value = "";
+                    post.replies.push(replyText);
+                    saveToLocalStorage(`${tabName}Posts`, getAllPosts(tabName));
+                }
+            }
+
+            function deletePost(postId, tabName) {
+                const postElement = document.getElementById(postId);
+                postElement.remove();
+
+                const savedPosts = getAllPosts(tabName);
+                const updatedPosts = savedPosts.filter(post => post.id !== postId);
+                saveToLocalStorage(`${tabName}Posts`, updatedPosts);
+            }
+
+            function submitPost(tabName) {
+                const postInput = document.getElementById(`${tabName}PostInput`);
+                const postList = document.getElementById(`${tabName}PostList`);
+
+                if (postInput.value.trim() !== "") {
+                    const newPost = {
+                        id: `${tabName}Post` + Date.now(),
+                        postText: postInput.value,
+                        replies: []
+                    };
+
+                    const newPostElement = createPostElement(newPost, tabName);
+
+                    postList.appendChild(newPostElement);
+                    saveToLocalStorage(`${tabName}Posts`, [...getAllPosts(tabName), newPost]);
+
+                    postInput.value = "";
+                }
+            }
+        </script>
+
+</body>
+
+</html>

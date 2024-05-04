@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Assist</title>
+  <link rel="stylesheet" href="style_lg.css">
+  <style>
+    .post {
+      border: 2px solid black;
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+
+    .answer-section {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="Navbar">
+    <img
+      src="https://imgs.search.brave.com/N9Kp0sduamOdtDdutt5p-LjxyUakuZvyU5lZZSJLBU8/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/Y29sbGVnZXByYXZl/c2guY29tLzIwMTYv/MDYvSUlULUJodWJh/bmVzd2FyLUxvZ28u/cG5n"
+      alt="">
+    <h2>IIT BHUBANESHWAR</h2>
+    <span class="navbar">
+      <ul>
+        <li><button onclick="openTab('HOME')">HOME</button></li>
+        <li><button onclick="openTab('lostFound')">Lost and Found</button></li>
+        <li><button onclick="openTab('events')">Events</button></li>
+        <li><button onclick="openTab('foodie')">Foodie</button></li>
+      </ul>
+    </span>
+  </div>
+  <div class="container">
+    <div class="iit">
+      <h2>Welcome to College Assist!</h2>
+    </div>
+
+    <div id="HOME" class="tabContent" style="display: block;">
+      <h5>hey there welcome to college assist ...</h5>
+    </div>
+    <!-- <div id="lostFound" class="tabContent" style="display: none;">
+      <div id="lostFoundPostForm">F
+        <h2>Post column</h2>
+        <div id="lostFoundPostSection">
+          <textarea id="lostFoundPostInput" placeholder="Type your post..."></textarea>
+        </div>
+        <button onclick="submitPost('lostFound')">Post</button>
+      </div>
+      <div id="lostFoundPostList"></div>
+    </div> -->
+
+
+    <!-- <div id="events" class="tabContent" style="display: none;">
+      <div id="eventsPostForm">
+        <h2>Post the Events</h2>
+        <div id="eventsPostSection">
+          <textarea id="eventsPostInput" placeholder="Type..."></textarea>
+        </div>
+        <button onclick="submitPost('events')">Post</button>
+      </div>
+      <div id="eventsPostList"></div>
+    </div> -->
+    <!-- <div id="foodie" class="tabContent" style="display: none;">
+    </div>
+  </div> -->
+
+    <script>
+      function openTab(tabName) {
+        if (tabName === 'lostFound' || tabName === 'events' || tabName === 'foodie') {
+          window.location.href = tabName + '.html';
+        } else {
+          var tabContent = document.getElementsByClassName("tabContent");
+          for (var i = 0; i < tabContent.length; i++) {
+            tabContent[i].style.display = "none";
+          }
+          document.getElementById(tabName).style.display = "block";
+        }
+      }
+
+
+    </script>
+
+    <script>
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (currentUser) {
+        const userDetailsContainer = document.getElementById('userDetailsContainer');
+        userDetailsContainer.textContent = ' Hey, ${ currentUser.email } (${ currentUser.userType }) Welcome!';
+      } else {
+
+        window.location.href = 'index.html';
+      }
+      /*
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js"
+        import { database  } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+      
+      
+              const firebaseConfig = {
+              apiKey: "AIzaSyD6nS9VMgZDH-cngLCLjOPWlvqG_IawL2M",
+              authDomain: "college-assist-8dd0b.firebaseapp.com",
+              projectId: "college-assist-8dd0b",
+              storageBucket: "college-assist-8dd0b.appspot.com",
+              messagingSenderId: "800208591105",
+              appId: "1:800208591105:web:892f8ea03c9367c753a300",
+              measurementId: "G-9W3DK7EDB2"
+              };
+      
+          firebase.initializeApp(firebaseConfig);
+          const database = firebase.database();
+      
+          document.getElementById("submit").addEventListener('click', submitPost);
+      
+      
+          function submitPost(){
+            const postContent = document.getElementById('postContent').value.trim();
+      
+            if (postContent === '') {
+              alert('Please enter a post.');
+              return;
+            }
+      
+            const newPostRef = database.ref('posts').push();
+            newPostRef.set({
+              content: postContent,
+              timestamp: firebase.database.ServerValue.TIMESTAMP
+            }).then(() => {
+              alert('Post submitted successfully!');
+              document.getElementById('postContent').value = ''; 
+              fetchAndDisplayPosts(); // Refresh 
+            }).catch((error) => {
+              console.error('Error submitting post:', error);
+              alert('An error occurred while submitting the post. Please try again.');
+            });
+          }
+      
+          // Function to display posts
+          function displayPosts(posts) {
+            const postsList = document.getElementById('postsList');
+            postsList.innerHTML = '';
+      
+            posts.forEach((post) => {
+              const postDiv = document.createElement('div');
+              postDiv.classList.add('post');
+              postDiv.innerHTML = `
+                <p>${post.content}</p>
+              `;
+              postsList.appendChild(postDiv);
+            });
+          }
+      
+          // Function to fetch and display posts
+          function fetchAndDisplayPosts() {
+            database.ref('posts').orderByChild('timestamp').on('value', (snapshot) => {
+              const posts = [];
+              snapshot.forEach((childSnapshot) => {
+                const post = {
+                  key: childSnapshot.key,
+                  ...childSnapshot.val()
+                };
+                posts.push(post);
+              });
+              displayPosts(posts.reverse());
+            });
+          }
+      
+          // Initial function call to fetch and display posts
+          // fetchAndDisplayPosts()
+          // real time database code /////
+          */
+
+
+
+      const userType = document.getElementById("userType");
+      if (userType === "admin") {
+        document.getElementById("publishPost").style.display = "block";
+      } else {
+        document.getElementById("publishPost").style.display = "none";
+      }
+
+
+    </script>
+
+
+</body>
+
+</html>

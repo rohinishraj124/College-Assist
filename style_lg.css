@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 40vw;
+    background-image: url('pic1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    position: relative;
+
+}
+
+.Navbar {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.Navbar img {
+    width: 5vw;
+    margin-left: 20px;
+}
+
+.Navbar h2 {
+    font-size: 2vw;
+    margin-left: 20px;
+}
+
+
+.iit {
+    font-size: 4vw;
+    margin-top: -3%;
+    margin-left: 5%;
+    border-bottom: 2px solid white;
+    padding-bottom: 15px;
+    color: white;
+    font-weight: 100;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 100%;
+    height: 50vw;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    background-color: rgba(50, 45, 45, 0.7);
+}
+
+.tabs {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+
+.tabs button {
+    color: black;
+    font-weight: 600;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.5vw;
+    background-color: grey;
+    border: none;
+    margin-left: 10px;
+}
+
+
+.navbar ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    margin-left: 35vw;
+}
+
+.navbar ul li {
+    margin-left: 2vw;
+    font-weight: 600;
+    color: black;
+    font-size: 1.5vw;
+    transform: translateX(-2vw);
+}
+
+
+.tabContent {
+    padding: 20px;
+}
+
+.post {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.post p {
+    margin-bottom: 10px;
+}
+
+.reply {
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.reply:last-child {
+    margin-bottom: 10px;
+}
+
+.answer-section {
+    display: none;
+}
+
+.comments-heading {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+button {
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: white;
+    font-weight: 600;
+    font-size: 1vw;
+    text-decoration: underline;
+}
+
+
+input[type="text"] {
+    width: calc(100% - 40px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Assist Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      background-image: url(https://imgs.search.brave.com/ifDvC0EJgQSim-TJj2_qXUOD7JZVfDjPXPY-gUneSdo/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcyODI5/OTIucG5n);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    div img {
+      width: 10vw;
+      display: flex;
+      margin-bottom: 1.5vw;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      margin-top: 1vw;
+      font-size: 2.5vw;
+    }
+
+    loginform {
+      max-width: 90%;
+      margin: auto;
+      padding: 20px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: -2vw;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 50%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    @media only screen and (min-width: 600px) {
+      loginform {
+        max-width: 30vw;
+      }
+    }
+  </style>
+
+
+  <script>
+
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD6nS9VMgZDH-cngLCLjOPWlvqG_IawL2M",
+      authDomain: "college-assist-8dd0b.firebaseapp.com",
+      projectId: "college-assist-8dd0b",
+      storageBucket: "college-assist-8dd0b.appspot.com",
+      messagingSenderId: "800208591105",
+      appId: "1:800208591105:web:892f8ea03c9367c753a300",
+      measurementId: "G-9W3DK7EDB2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const app = initializeApp(firebaseConfig);
+
+    /*
+    function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const userType = document.getElementById('userType').value;
+  
+    if (email.trim() === '') {
+      alert('Please enter your email.');
+      return;
+    }
+  
+    if (password.trim() === '') {
+      alert('Please enter your password.');
+      return;
+    }
+  
+    if (userType === 'select user type') {
+      alert('Please select the user type.');
+      return;
+    }
+  
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+   
+        window.location.href = 'login.html';
+      })
+      .catch((error) => {
+      
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  }
+  */
+
+    function login() {
+
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const userType = document.getElementById('userType').value;
+
+      if (email.trim() === '' || password.trim() === '' || userType === 'select user type') {
+        alert('Please fill out all fields and select a user type.');
+        return;
+      }
+
+      let csvFile;
+      if (userType === 'admin') {
+        csvFile = 'admin.csv';
+      } else if (userType === 'Consumer') {
+        csvFile = 'consumer.csv';
+      } else if (userType === 'business') {
+        csvFile = 'business.csv';
+      }
+
+
+      fetch(csvFile)
+        .then(response => response.text())
+        .then(data => {
+
+          const rows = data.split('\n');
+          let found = false;
+          for (let i = 1; i < rows.length; i++) {
+            const cols = rows[i].split(',');
+            const csvEmail = cols[0].trim();
+            const csvPassword = cols[1].trim();
+            if (csvEmail === email && csvPassword === password) {
+              found = true;
+              alert('Login successful!');
+              localStorage.setItem('currentUser', JSON.stringify({ email, userType }));
+
+              window.location.href = 'lg.html';
+              break;
+            }
+          }
+          if (!found) {
+            alert('Invalid email or password.');
+          }
+        })
+        .catch(error => {
+          console.error('Error reading CSV file:', error);
+          alert('An error occurred. Please try again.');
+        });
+    }
+
+  </script>
+</head>
+
+<body>
+  <h1>IIT BHUBANESHWAR</h1>
+
+  <h2>login</h2>
+  <loginform>
+    <div><img
+        src="https://imgs.search.brave.com/N9Kp0sduamOdtDdutt5p-LjxyUakuZvyU5lZZSJLBU8/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/Y29sbGVnZXByYXZl/c2guY29tLzIwMTYv/MDYvSUlULUJodWJh/bmVzd2FyLUxvZ28u/cG5n"
+        alt=""></div>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" placeholder="enter your email"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" placeholder="enter your password"><br>
+    <label for="userType">User Type:</label><br>
+    <select id="userType" name="userType">
+
+      <option value="admin">select user type</option>
+      <option value="admin">Admin</option>
+      <option value="Consumer">Consumer</option>
+      <option value="business">Business</option>
+    </select><br><br>
+    <button type="button" id="login">Login</button>
+    </form>
+
+    <SCRIpt>
+      document.getElementById("login").addEventListener("click", login);
+    </SCRIpt>
+</body>
+
+</html>
